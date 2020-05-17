@@ -1,11 +1,11 @@
 {
-  "name": "zamora",
+  "name": "andrewzamora.tech",
   "private": true,
   "description": "Zamora's Blog",
   "version": "0.1.0",
   "author": "Andrew Zamora",
   "bugs": {
-    "url": "https://github.com/AndrewZamora/zamora/issues"
+    "url": "https://github.com/AndrewZamora/andrewzamora.tech/issues"
   },
   "dependencies": {
     "gatsby": "^2.21.22",

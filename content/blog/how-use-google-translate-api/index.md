@@ -9,7 +9,7 @@ Before we start you are going to need to download and install Node.js and a code
 ```
 mkdir translate
 
-touch index.js 
+touch index.js
 ```
 
 Change directories into `translate` and open `index.js` in the code editor of your choice. If you are using Visual Studio Code you can use the `code` command to open up the directory.
@@ -19,6 +19,7 @@ cd translate
 
 code .
 ```
+
 Because we installed Node.js we can create a `package.json` file with the `npm init` command. If you are not sure what that is, it's a file that helps us manage other developers code that we depend on to have our code run. I'm also going to use the `-y` flag to say yes to all of questions that it prompts you with.
 
 ```
@@ -30,6 +31,7 @@ You should see a package.json file in addition to the `index.js` file in the `tr
 ```
 npm i @google-cloud/translate
 ```
+
 Open up `package.json` in your editor and it should look something like this.
 
 ```
@@ -49,5 +51,13 @@ Open up `package.json` in your editor and it should look something like this.
   }
 }
 ```
-Before we can start writing code, we need to get an API key from the Google Cloud Dashboard.
 
+Before we can start writing code, create an account on the Google Cloud Dashboard and generate an API Key. Your API key is tied to your credit card so it needs to be secured. This can be done on the Google Cloud Dashboard by whitelisting the IPs or domains you plan to use the API key with. In addition, the API key should be hidden from version control. One way to do this is with Git by: 
+
+Initializing the directory for Git and creating a `.gitignore` and `google-creds.json` file.
+```
+git init
+touch .gitignore
+touch google-creds.json
+
+```

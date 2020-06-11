@@ -52,12 +52,48 @@ Open up `package.json` in your editor and it should look something like this.
 }
 ```
 
-Before we can start writing code, create an account on the Google Cloud Dashboard and generate an API Key. Your API key is tied to your credit card so it needs to be secured. This can be done on the Google Cloud Dashboard by whitelisting the IPs or domains you plan to use the API key with. In addition, the API key should be hidden from version control. One way to do this is with Git by: 
+Before we can start writing code, create an account on the Google Cloud Dashboard and generate an API Key. Your API key is tied to your credit card so it needs to be secured. This can be done on the Google Cloud Dashboard by whitelisting the IPs or domains you plan to use the API key with. In addition, the API key should be hidden from version control. One way to do this is with Git by:
 
 Initializing the directory for Git and creating a `.gitignore` and `google-creds.json` file.
+
 ```
 git init
 touch .gitignore
 touch google-creds.json
+
+```
+
+Copy and paste your Google API credentials into `google-creds.json`. In the `.gitignore` file list the credentials file like so:
+
+```
+google-creds.json
+```
+
+If you run `git init` and run `git status` you will notice that every file expect `google-creds.json` is marked as untracked.
+
+```
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        .gitignore
+        index.js
+        node_modules/
+        package-lock.json
+        package.json
+
+nothing added to commit but untracked files present (use "git add" to track)
+```
+Git is ignoring `.google-creds.json`. If our `translate` folder were to be pushed to an online repository, we won't have to worry about exposing this projects API credentials. While we are at it let's also add `/node_modules` to `.gitignore` as well because we don't need to keep track of changes in our dependencies and we can always install them with `npm i`.
+
+Now we can start coding. We will connect `index.js` to `google-creds.json` and the Google Translate code we installed with NPM.
+```
+const googleCreds = require('./google-creds.json'); 
+// If you console.log(googleCreds) you will see your API keys
+const { Translate } = require('@google-cloud/translate').v2;
+// This connects our code to Googles translate API.
 
 ```

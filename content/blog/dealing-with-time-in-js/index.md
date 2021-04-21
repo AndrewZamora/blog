@@ -45,3 +45,21 @@ console.log(dateWillNull)
 Jan 1st 1970(UTC) is the starting point from which the Date object keeps track of time. The examples up until now are based on local time. This matters because if we call the `getHours()` getter method on them we will get `0` but call that on a Date object with `null` as a parameter we will get `0` + the GMT difference(in my case `9`). To get around this we can call the UTC equivalent getter method `getUTCHours()` which will return `0`. It's ok to use local or UTC times since we are using the Date object to keep track of small durations of time and not a specific day or year. We just have to keep in mind which getter and setter methods to use.
 
 Now that we have a few ways to handle time in a Date object, we can use the code below to retrieve and display that time in a desired format.
+
+
+```
+// Using Local Time:
+const desiredTimeInSecs = 3600;
+const dateLocal = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+dateLocal.setSeconds(desiredTimeInSecs);
+const [hour, min, sec] = d.toLocaleTimeString("en-US").split(/:| /);
+const desiredTimeFormat = `${hour}:${min}:${sec}`;
+```
+```
+// Using UTC Time:
+const desiredTimeInSecs = 3600;
+const dateUTC = new Date(null);
+dateUTC.setUTCSeconds(desiredTimeInSecs);
+const [dayOfTheWeek, date, month, year, hour, min] = dateUTC.toUTCString().split(/:| /);
+const desiredTimeFormat = `${hour}:${min}:${sec}`;
+```

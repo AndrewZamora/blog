@@ -64,6 +64,7 @@ dateLocal.setSeconds(desiredTimeInSecs);
 const [hour, min, sec] = d.toLocaleTimeString("en-US").split(/:| /);
 const desiredTimeFormat = `${hour}:${min}:${sec}`;
 ```
+(**Keep in mind* that when using the `toLocaleTimeString` method without passing any parameters. It will default to the user's local environment. This is important because the time string that is returned can change depending on where the user is located. For example, if a date object was created at `11:58:23` passing `"en-US"` to `toLocaleTimeString` will return `"11:58:23 PM"` while `"en-GB"` will return `"23:58:23"`.)
 ```
 // Using UTC Time:
 const desiredTimeInSecs = 3600;

@@ -29,7 +29,7 @@ Please note that the date string that the `toLocaleDateString` method returns ch
 
 ## Adding or Omitting a Leading Zero
 
-Sometimes you will need pass the a date to an input or component with or without a leading zero. The `slice` method and the `parseInt` function can accomplish this. 
+Sometimes you will need pass the a date to an input or component with or without a leading zero. The `slice` method and the `parseInt` function can accomplish this.
 
 Adding a Leading Zero:
 

@@ -10,7 +10,7 @@ The other day I was working with a JavaScript library that required timestamps b
 
 The first option is to use the `new Date()` object to get the current date and resetting `HH:MM:SS.fff` to zero and then to my desired time.
 
-```
+```javascript
 const durationInSeconds = 2225;
 // Sun Apr 18 2021 21:43:56 GMT+0900 (Japan Standard Time)
 const exampleDate = new Date(); 
@@ -26,16 +26,19 @@ exampleDate.setMilliseconds(0);
 // Sun Apr 18 2021 00:37:05 GMT+0900 (Japan Standard Time)
 exampleDate.setSeconds(durationInSeconds);
 ```
+
 The Date Object's `setHours` method can also set the time to zero in one line by passing it more parameters.
 
-```
+```javascript
 // Wed May 05 2021 22:39:26 GMT+0900 (Japan Standard Time)
 const exampleDate2 = new Date();
 // Wed May 05 2021 00:00:00 GMT+0900 (Japan Standard Time)
 exampleDate2.setHours(0,0,0,0);
 ```
+
  Also, if you instead want to set the current year/month/day and set the HH:MM:SS.fff to zero.
-```
+
+```javascript
 // Sun Apr 18 2021 00:00:00 GMT+0900 (Japan Standard Time)
 const exampleDate3 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 // Sun Apr 18 2021 00:37:05 GMT+0900 (Japan Standard Time)
@@ -45,18 +48,19 @@ exampleDate3.setSeconds(durationInSeconds);
 
 In addition to the options above. We can pass `null` as a parameter to the `new Date()` constructor to reset `HH:MM:SS.fff` to zero (well sort of).
 
-```
+```javascript
 const dateWithNull = new Date(null);
 console.log(dateWillNull)
 // Thu Jan 01 1970 09:00:00 GMT+0900 (Japan Standard Time)
 ```
+
 Jan 1st 1970(UTC) is the starting point from which the Date object keeps track of time. The examples up until now are based on local time. This matters because if we call the `getHours()` getter method on the past examples we will get `0` but call that on a Date object with `null` as a parameter we will get `0` + the GMT difference(in my case `9`). To get around this we can call the UTC equivalent getter method `getUTCHours()` which will return `0`. It's ok to use local or UTC times since we are using the Date object to keep track of small durations of time and not a specific day or year. We just have to keep in mind which getter and setter methods to use.
 
-### Retrieve and Format the Time 
+### Retrieve and Format the Time
 
 Now that we have a few ways to handle time in a Date object, we can use the code below to retrieve and display that time in a desired format.
 
-```
+```javascript
 // Using Local Time:
 const desiredTimeInSecs = 3600;
 const dateLocal = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
@@ -64,8 +68,10 @@ dateLocal.setSeconds(desiredTimeInSecs);
 const [hour, min, sec] = d.toLocaleTimeString("en-US").split(/:| /);
 const desiredTimeFormat = `${hour}:${min}:${sec}`;
 ```
+
 (**Keep in mind* that when using the `toLocaleTimeString` method without passing any parameters. It will default to the user's local environment. This is important because the time string that is returned can change depending on where the user is located. For example, if a date object was created at `11:58:23` passing `"en-US"` to `toLocaleTimeString` will return `"11:58:23 PM"` while `"en-GB"` will return `"23:58:23"`.)
-```
+
+```javascript
 // Using UTC Time:
 const desiredTimeInSecs = 3600;
 const dateUTC = new Date(null);
@@ -73,6 +79,7 @@ dateUTC.setUTCSeconds(desiredTimeInSecs);
 const [dayOfTheWeek, date, month, year, hour, min] = dateUTC.toUTCString().split(/:| /);
 const desiredTimeFormat = `${hour}:${min}:${sec}`;
 ```
+
 ### Conclusion
 
 You get both the date and time when you use JavaScript's Date object. You can't separate the two from each other. But you can set one or the other to an arbitrary value and use the one you need. There are several ways to initialize the Date object and set the time to zero. Just make sure to use the proper setter and getter methods depending on whether you want to use UTC or local time. For more info check [MDN's]("https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date") documentation on JavaScript's Date constructor and object.

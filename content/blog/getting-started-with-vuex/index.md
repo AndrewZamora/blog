@@ -6,6 +6,8 @@ description: An introduction to managing global state with Vuex
 
 ## Create a Store
 
+The following creates a Vuex store.
+
 ```javascript
 import Vue from "vue"
 import Vuex from "vuex"
@@ -20,7 +22,7 @@ const store = new Vuex.Store({
 })
 ```
 
-A store can be created in separate file and exported like below:
+A store can also be created in a separate file and exported like below:
 
 ```javascript
 export default new Vuex.Store({
@@ -33,7 +35,7 @@ export default new Vuex.Store({
 
 ## Make the Store Accessible
 
-The store needs to be added to the Vue instance in order to get state in Vue components.
+The store needs to be added to the Vue instance in order to retrieve the state in Vue components.
 
 ```javascript
 new Vue({
@@ -57,7 +59,7 @@ new Vue({
 
 ## Get State from the Store
 
-To demonstrate how to retrieve state from the store I will add some test data to the `state` object first.
+To demonstrate how to retrieve state from the store I've added test data to the `state` object.
 
 ```javascript
 const store = new Vuex.Store({
@@ -72,7 +74,7 @@ const store = new Vuex.Store({
 })
 ```
 
-Now that the store is initialized, the state can be called in a Vue component with `this.$store.state` like so:
+Now that the store is initialized, the state can be called in a Vue component with `this.$store.state`.
 
 ```javascript
 <template>
@@ -92,7 +94,7 @@ const newObj = {}
 this.$store.state = newObj
 ```
 
-Methods set in the `mutations` field of the Vuex store are used to change state.
+Methods set in the `mutations` field of the Vuex store are used to change the state.
 
 ```javascript
 const store = new Vuex.Store({
@@ -111,18 +113,18 @@ const store = new Vuex.Store({
 })
 ```
 
-To trigger a `mutations` method a commit is used in a Vue component.
+To trigger a `mutation` method a commit is used in a Vue component.
 
 ```javascript
 // this.$store.commit("METHOD_NAME", PAYLOAD)
 this.$store.commit("likeMoreFood", "🍕")
 ```
 
-_All mutations need to be synchronous._
+_Keep in mind that all mutations need to be synchronous._
 
 ## Change State Asynchronously
 
-Asynchronous changes, such as callbacks and fetch requests, happen in the methods in the store's `actions` object.
+Asynchronous changes, such as callbacks and fetch requests, are handled by action methods. After an action is finished with an asynchronous task, a mutation can be triggered to update the state.  
 
 ```javascript
 ...
@@ -138,8 +140,31 @@ Asynchronous changes, such as callbacks and fetch requests, happen in the method
 ...
 ```
 
-To trigger `actions` methods dispatches are used in Vue components.
+Instead of commits, actions are triggered by dispatches in Vue components.
 
 ```javascript
 this.$store.dispatch("asyncLikeMoreFood");
+```
+
+## React to State Changes
+
+Creating a computed property that returns data from the store state object will cause any elements in the template that uses this computed property to reflect the changes in state.
+
+```javascript
+<template>
+  <div id="app">
+    {{favoriteFoods}}
+  </div>
+</template>
+
+<script>
+export default {
+  name: "App",
+  computed: {
+    favoriteFoods(){
+      return this.$store.state.favoriteFoods;
+    }
+  }
+};
+</script>
 ```

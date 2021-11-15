@@ -4,6 +4,9 @@ date: "2021-08-15T06:47:34.984Z"
 description: An introduction to managing global state with Vuex
 ---
 
+## Set Up
+Vuex can be installed in few [ways](https://vuex.vuejs.org/installation.html#direct-download-cdn) including [NPM](https://www.npmjs.com/). As for [Vue.js](https://vuejs.org/v2/guide/), all examples below use version 2.
+
 ## Create a Store
 
 The following creates a Vuex store.
@@ -84,9 +87,9 @@ Now that the store is initialized, the state can be called in a Vue component wi
 </template>
 ```
 
-## Change the State
+## Update State
 
-The state cannot be changed by directly mutating the state object.
+The state cannot be updated by directly mutating the state object.
 
 ```javascript
 // Don't do this!
@@ -94,7 +97,7 @@ const newObj = {}
 this.$store.state = newObj
 ```
 
-Methods set in the `mutations` field of the Vuex store are used to change the state.
+Methods set in the `mutations` field of the Vuex store are used to update state.
 
 ```javascript
 const store = new Vuex.Store({
@@ -122,7 +125,7 @@ this.$store.commit("likeMoreFood", "🍕")
 
 _Keep in mind that all mutations need to be synchronous._
 
-## Change State Asynchronously
+## Update State Asynchronously
 
 Asynchronous changes, such as callbacks and fetch requests, are handled by action methods. After an action is finished with an asynchronous task, a mutation can be triggered to update the state.  
 

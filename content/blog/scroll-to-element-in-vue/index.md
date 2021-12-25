@@ -41,6 +41,8 @@ const app = new Vue({
 
 In the `scrollToBottom` method `this.$refs['THE_ELEMENT_YOU_WANT_TO_TARGET]` instead of `document` and a selector is used to call `scrollIntoView` (Passing `{behavior: "smooth"}` as options allows for smooth scrolling). Clicking the button now will scroll to the bottom element.
 
+https://codepen.io/andrewzamora/pen/BawmWbx
+
 ## Realizing when you need an offset
 
 So far scrolling in Vue is pretty simple with the `scrollIntoView` method. The only problem here is that if there is an element like a nav bar or header that push the element you are trying to scroll to down, it's going to get cut off. `scrollIntoView` has several options we can pass it but none of them will allow for offsetting the position that it scrolls to. The code below demonstrates an offset issue caused by a `header` element.

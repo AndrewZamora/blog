@@ -6,7 +6,7 @@ description: How to scroll to an HTML element in Vue JS with or without an offse
 
 ## Introduction
 
-Scrolling to an HTML in Vue is fairly straightforward but doing so with an offset is not. This guide will discuss how to do both.
+Scrolling to an HTML element in Vue is fairly straightforward but doing so with an offset is not. This guide will discuss how to do both.
 _Please note examples below will be using Vue.js version 2._
 
 ## Create a scrollable container
@@ -43,9 +43,9 @@ In the `scrollToBottom` method `this.$refs['THE_ELEMENT_YOU_WANT_TO_TARGET]` ins
 
 https://codepen.io/andrewzamora/pen/BawmWbx
 
-## Realizing when you need an offset
+## Adding an Offset
 
-So far scrolling in Vue is pretty simple with the `scrollIntoView` method. The only problem here is that if there is an element like a nav bar or header that push the element you are trying to scroll to down, it's going to get cut off. `scrollIntoView` has several options we can pass it but none of them will allow for offsetting the position that it scrolls to. The code below demonstrates an offset issue caused by a `header` element.
+So far scrolling in Vue is pretty simple with the `scrollIntoView` method. The problem is that if there is an element like a nav bar or header that push down the element that you are trying to scroll to, it's going to get cut off. `scrollIntoView` has several options we can pass it but none of them will allow for offsetting the position that it scrolls to. In the code below pressing the "Scroll To Element with No Offset" button demonstrates an offset issue caused by a `header` element.
 
 ```html
 <header
@@ -55,19 +55,49 @@ So far scrolling in Vue is pretty simple with the `scrollIntoView` method. The o
 </header>
 <div
   id="app"
-  style="height:300vh; background:green; display: flex; flex-direction: column; align-items: center;padding-top: 50px"
+  style="height:300vh; background:green; display: flex; flex-direction: column; align-items: center;padding-top: 50px;"
 >
-  <button style="font-size: 60px; cursor:pointer;" @click="scrollToBottom">
-    Scroll to Bottom Element
+  <button
+    style="font-size: 1em; cursor:pointer; background: red;"
+    @click="scrollToElement"
+  >
+    Scroll to Element with No Offset
   </button>
-  <h1 ref="bottom">Bottom</h1>
+  <button
+    style="font-size: 1em; cursor:pointer; background: green;"
+    @click="scrollToHiddenElement"
+  >
+    Scroll to Element with an Offset
+  </button>
+  <div style="position: relative">
+    <div
+      ref="hiddenElement"
+      style="height: 50px; position: absolute; top: -50px; pointer-events: none;"
+    ></div>
+    <h1 ref="element">Element You Want To Scroll To</h1>
+  </div>
 </div>
 ```
-A header has been added and the `app` container 
 
-```html
-<div
-  :ref=""
-  style="height: 55px; position: absolute; top: -55px; pointer-events: none;"
-></div>
+```javascript
+const app = new Vue({
+  el: "#app",
+  data: {},
+  methods: {
+    scrollToElement() {
+      this.$refs["element"].scrollIntoView({ behavior: "smooth" });
+    },
+    scrollToHiddenElement() {
+      this.$refs["hiddenElement"].scrollIntoView({ behavior: "smooth" });
+    }
+  }
+});
 ```
+
+https://codepen.io/andrewzamora/pen/ZEXBmGY
+
+One way to handle this issue would be to use Window.[ScrollTo()]("https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo") instead of `scrollIntoView`. If you have the access to the `Window` object this works well. The code example above is a good workaround if you can't access the `Window` object. The `h1` element is wrapped in a parent element which is positioned `relative`. This allows for hiding a positioned `absolute` element above the `h1`. This "hidden" element's `top` and `height` styles are set to how much of an offset is needed without making the page look visually taller to the user. Then by adding `ref="hiddenElement"` to the "hidden" element, `scrollIntoView` will scroll to it. But to the user, they will be scrolled to their desired element without having it cut off. Clicking the "Scroll to Element With Offset" button above will demonstrate this.
+
+## Conclusion
+
+In Vue.js use a `ref` and`scrollIntoView` to scroll to an HTML Element. But `scrollIntoView` doesn't have options for an offset. Instead use `Window.ScrollTo()` for an offset if you have access to the `Window` Object. If not use a `ref` and `scrollIntoView` to scroll to a positioned absolute element that is the same size as the offset you want.

@@ -17,4 +17,4 @@ const nameOfTheMonth = dateObj.toLocaleDateString(locales, options)
 // Log/print the name of the month
 console.log(nameOfTheMonth)
 ```
-Click [here]('https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString') for browser compatibility and more info about the toLocaleDateString method.
+Click [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString) for browser compatibility and more info about the toLocaleDateString method.

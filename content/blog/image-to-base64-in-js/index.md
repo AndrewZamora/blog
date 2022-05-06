@@ -65,6 +65,6 @@ function fileUploadHandler() {
 };
 ```
 
-Clicking on the `Upload` button should log out a base64 string in the developer console and an image preview will appear next to the file input. Also, you can can check out the demo below:
+Clicking on the `Upload` button should log out a base64 string in the developer console and an image preview will appear next to the file input. Also, you can check out the demo below:
 
 https://codepen.io/andrewzamora/pen/xQQYOQ

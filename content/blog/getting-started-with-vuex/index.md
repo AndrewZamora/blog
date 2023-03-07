@@ -128,19 +128,20 @@ _Keep in mind that all mutations need to be synchronous._
 
 ## Update State Asynchronously
 
-Asynchronous changes, such as callbacks and fetch requests, are handled by action methods. After an action is finished with an asynchronous task, a mutation can be triggered to update the state.  
+Asynchronous changes, such as callbacks and fetch requests, are handled by action methods. After an action is finished with an asynchronous task, a mutation can be triggered to update the state.
 
 ```javascript
 ...
   actions: {
-     const fakeFetch = async function () {
+    async asyncLikeMoreFood(context, newFood){
+      const fakeFetch = async function() {
       //  Async functions return a Promise
         return "🌯";
       };
       const newFood = await fakeFetch();
       context.commit("likeMoreFood", newFood);
-  },
-});
+    }
+  }
 ...
 ```
 

@@ -3,29 +3,31 @@ title: Handle YYYY-MM-DD in JavaScript
 date: "2021-05-16T10:41:05.720Z"
 description:  Handle YYYY-MM-DD in JavaScript without a library.
 ---
-Getting the year, month and date in JavaScript without a library isn't very difficult. However, getting it into the format you want can be frustrating the first time you encounter this issue. I approach this in two different ways depending on whether I'm using an ISO date string or local date string.
+Getting the year, month and date in JavaScript without a library isn't very difficult. However, getting it into the format you want can be frustrating the first time you encounter this issue.
 
-## ISO Date String
-
-```javascript
-// Sun May 16 2021 20:01:05 GMT+0900 (Japan Standard Time)
-const exampleA = new Date();
-const [ year, month, date ] = exampleA.toISOString().split("T")[0].split("-");
-// "2021-05-16"
-console.log(`${year}-${month}-${date}`);
-```
-
-## Local Date String
+## Use toLocalDateString
 
 ```javascript
-// Sun May 16 2021 20:58:45 GMT+0900 (Japan Standard Time)
-const exampleB = new Date();
-const [ date, month, year] = exampleB.toLocaleDateString("en-GB").split("/");
-// "2021-05-16"
-console.log(`${year}-${month}-${date}`);
+// Sun May 16 2021 23:17:55 GMT+0900 (Japan Standard Time)
+const date = new Date(1621174675625);
+const exampleDateString = date.toLocaleDateString("en-GB");
+// "16/05/2021"
+console.log(exampleDateString);
 ```
 
-Please note that the date string that the `toLocaleDateString` method returns changes depending on the locale code that is passed to it. For example, `toLocaleDateString("en-US")` will return `"5/16/2021"`. Make sure to adjust how you split and deconstruct the date string to deal with your local date format.
+Please note that the date string that the `toLocaleDateString` method returns changes depending on the locale code that is passed to it. For example, `toLocaleDateString("en-US")` will return `"5/16/2021"`.
+
+## Options with toLocalDateString
+
+`toLocalDateString` can also take an options object as a second parameter. This allows more control over the formatting of the string it returns.
+
+```javascript
+// Sun May 16 2021 23:17:55 GMT+0900 (Japan Standard Time)
+const date = new Date(1621174675625);
+const options = { month: 'long', weekday: 'short', day: 'numeric', year: 'numeric' };
+const exampleDateString = date.toLocaleDateString("en-GB", options);
+console.log(exampleDateString);
+```
 
 ## Adding or Omitting a Leading Zero
 

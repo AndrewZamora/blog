@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "Andrew Zamora",
   "bugs": {
-    "url": "https://github.com/AndrewZamora/andrewzamora.tech/issues"
+    "url": "https://github.com/AndrewZamora/blog/issues"
   },
   "dependencies": {
     "@weknow/gatsby-remark-codepen": "^0.1.0",
@@ -37,6 +37,7 @@
     "typography-theme-wordpress-2016": "^0.16.19"
   },
   "devDependencies": {
+    "gh-pages": "^6.1.0",
     "prettier": "2.0.5"
   },
   "homepage": "",
@@ -56,6 +57,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public"
   }
 }

@@ -5,8 +5,8 @@ module.exports = {
       name: `Andrew Zamora`,
       summary: `who lives and works in Osaka building useful things.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    description: `My personal blog.`,
+    siteUrl: `https://azamora/blog`,
     social: {
       twitter: `AndrewMZamora`,
     },
@@ -87,4 +87,5 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
+  pathPrefix: "/blog"
 }

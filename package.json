@@ -1,5 +1,5 @@
 {
-  "name": "andrewzamora.tech",
+  "name": "blog",
   "private": true,
   "description": "Zamora's Blog",
   "version": "0.1.0",
@@ -58,6 +58,6 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d -f public"
+    "deploy": "gatsby build --prefix-paths && gh-pages -f -d public"
   }
 }
